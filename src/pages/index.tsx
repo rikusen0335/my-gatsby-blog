@@ -1,3 +1,4 @@
+import { PageProps } from "gatsby"
 import * as React from "react"
 
 // styles
@@ -126,7 +127,7 @@ const links = [
 ]
 
 // markup
-const IndexPage = () => {
+const IndexPage: React.FC<PageProps> = () => {
   return (
     <main style={pageStyles}>
       <title>Home Page</title>
