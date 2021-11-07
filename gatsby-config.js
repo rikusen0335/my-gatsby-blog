@@ -1,7 +1,10 @@
+const remarkTypescript = require('remark-typescript');
+
 module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
     title: "rikusenlog",
+    twitter: "https://twitter.com/RikuS3n",
   },
   plugins: [
     "gatsby-plugin-image",
@@ -19,8 +22,20 @@ module.exports = {
         icon: "src/images/icon.png",
       },
     },
-    "gatsby-transformer-remark",
-    "gatsby-plugin-mdx",
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: [`.mdx`, `.md`],
+        remarkPlugins: [remarkTypescript],
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/posts`,
+        name: `posts`
+      }
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
@@ -38,6 +53,12 @@ module.exports = {
         path: "./src/pages/",
       },
       __key: "pages",
+    },
+    {
+      resolve: 'gatsby-plugin-graphql-codegen',
+      options: {
+        fileName: `types/graphql-types.d.ts`
+      }
     },
   ],
 };
